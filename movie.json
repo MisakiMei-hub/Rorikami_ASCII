@@ -1,4 +1,6 @@
 {
+  "format": "ASCII03",
+  "bytes_per_cell": 4,
   "width": 240,
   "height": 68,
   "fps": 24,
@@ -10,5 +12,56 @@
   "source_audio": "audio.m4s",
   "watermark_removed": true,
   "auto_trim_black_borders": true,
-  "default_display": "fill terminal viewport"
+  "stable_crop_transitions": 10,
+  "character_ramp": " .-:,;=*+xoa#8WM%B&@",
+  "color_encoding": "cell-aligned RGB, 16-step channel quantization",
+  "contrast": "fixed shadow lift and local contrast; calibrated glyph coverage",
+  "matte_runs": [
+    {
+      "start_frame": 0,
+      "layout": 0
+    },
+    {
+      "start_frame": 1,
+      "layout": 2
+    },
+    {
+      "start_frame": 381,
+      "layout": 1
+    },
+    {
+      "start_frame": 1224,
+      "layout": 2
+    },
+    {
+      "start_frame": 2404,
+      "layout": 1
+    },
+    {
+      "start_frame": 2963,
+      "layout": 2
+    },
+    {
+      "start_frame": 3243,
+      "layout": 0
+    },
+    {
+      "start_frame": 4179,
+      "layout": 2
+    },
+    {
+      "start_frame": 4213,
+      "layout": 3
+    },
+    {
+      "start_frame": 5158,
+      "layout": 2
+    },
+    {
+      "start_frame": 6106,
+      "layout": 1
+    }
+  ],
+  "default_display": "fill terminal viewport",
+  "storage": "per-frame character / R / G / B planes"
 }

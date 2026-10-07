@@ -11,3 +11,5 @@ snapshot.txt
 *.m4s
 *.mp4
 *.zip
+movie.ascii.building.gz
+movie.ascii.planar.gz

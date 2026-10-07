@@ -7,10 +7,10 @@
 ## 开始播放
 
 1. 下载仓库 ZIP 并解压，或运行 `git clone https://github.com/MisakiMei-hub/Rorikami_ASCII.git`。
-2. 双击 `Play-Ascii.cmd` 播放黑白版本，或双击 `Play-Ascii-Color.cmd` 播放 16 色版本。
+2. 双击 `Play-Ascii.cmd` 播放黑白版本，或双击 `Play-Ascii-Color.cmd` 播放 RGB 真彩色版本。
 3. 使用 `Alt + Enter` 切换全屏；窗口大小变化时，字符画面会自动铺满可用区域，底部保留一行操作提示。
 
-播放只需要 Windows 自带的 PowerShell；无需安装 Python、FFmpeg 或额外播放器。建议使用 Windows Terminal 和 Consolas 等常规等宽字体。
+播放只需要 Windows 自带的 PowerShell；无需安装 Python、FFmpeg 或额外播放器。建议使用 Windows Terminal 和 Consolas 等常规等宽字体，以获得真彩色效果。旧终端无法启用 ANSI 时，会使用兼容的 16 色绘制。
 
 也可以在项目目录的 PowerShell 中运行：
 
@@ -48,9 +48,16 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\Play-Ascii.ps1 -Snapsh
 ## 视频处理与同步
 
 - 时长约 4 分 34 秒，240×68 字符，24 帧/秒。
-- 转换时去除原片右上角固定水印，并自动裁掉黑边。
+- 转换时去除原片右上角固定水印；先识别原片黑边，再按片段固定裁切，避免逐帧移动边界造成晃动。
+- 固定暗部提升、局部轮廓增强，并按字体实际字符覆盖率匹配明暗，保留眼睛、头发和服装的细节。
+- 彩色字符使用同一网格上的 RGB 颜色；肤色、眼睛和衣服颜色不再压缩到固定的 16 色。轻度颜色量化减少噪点。
+- ANSI 按绝对行位置完整刷新画面，禁用自动换行，并在窗口尺寸变化时清除残帧。
 - 默认按窗口宽高铺满画面；窗口比例不同时，画面比例会随之改变。
 - Windows 原生 MCI 播放 PCM 音频，画面按音频进度同步，暂停和重播同时作用于画面与声音。
+
+### 新版彩色效果
+
+![RGB 真彩色字符画面](revision2-color-preview.png)
 
 ## 重新转换
 
@@ -65,13 +72,16 @@ python .\build_ascii.py --video "D:\素材\video.m4s" --audio "D:\素材\audio.m
 
 ## 项目文件
 
+转换回归检查：`python -m unittest discover -s tests -v`。播放数据检查使用上述 `-Verify` 参数。
+
 | 文件 | 用途 |
 | --- | --- |
 | `Play-Ascii.cmd` / `Play-Ascii-Color.cmd` | 双击启动入口 |
 | `Play-Ascii.ps1` | PowerShell 播放入口 |
 | `AsciiPlayer.cs` | 字符渲染、音频同步与键盘控制 |
-| `movie.ascii.gz` | 已转换的字符帧及颜色数据 |
+| `movie.ascii.gz` | ASCII03 字符帧与 RGB 通道；播放器也兼容旧格式 |
 | `audio.wav` | 原音轨转换的 PCM 音频 |
 | `movie.json` | 视频参数 |
 | `build_ascii.py` / `requirements.txt` | 重新转换源码及依赖 |
 | `preview.png` / `preview.txt` | 字符画面预览 |
+| `revision2-color-preview.png` | 新版 RGB 彩色效果预览 |
