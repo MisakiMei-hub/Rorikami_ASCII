@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.vscode/
+.idea/
+Thumbs.db
+Desktop.ini
+*.log
+snapshot.txt
+*.m4s
+*.mp4
+*.zip

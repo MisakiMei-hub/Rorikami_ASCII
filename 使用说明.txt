@@ -1,0 +1,36 @@
+Rorikami ASCII 字符视频（带原音轨）
+
+双击 Play-Ascii.cmd：白色 ASCII 字符 + 黑色背景，自动播放声音。
+双击 Play-Ascii-Color.cmd：16 色 ASCII 字符，自动播放声音。
+
+快捷键：空格暂停/继续；播放结束后，空格从头重播。
+R 随时从头重播，Q 或 Esc 退出播放器，并保留 PowerShell 窗口。
+播完会停留在最后画面，显示 ENDED / Space: replay，不会自动关闭。
+画面自动铺满窗口，底部保留一行操作提示；放大、缩小、全屏都会实时适配。
+已去掉右上角固定水印，自动裁掉原片黑边。
+建议使用 Windows Terminal / PowerShell，Alt + Enter 可切换全屏，
+将字体调小（Ctrl + 鼠标滚轮）或最大化，显示更多字符，画面更清晰。
+字符按约 1:2 的字宽/字高设计，适合 Consolas 等常规等宽字体。
+
+也可以在 PowerShell 中运行：
+  powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\Play-Ascii.ps1
+若脚本执行策略阻止运行，使用上面的 .cmd 启动文件即可。
+
+可选参数：
+  -Color                  彩色字符
+  -Mute                   静音
+  -PreviewSeconds 10      只播放前 10 秒
+  -Verify                 检查全部字符帧和音频文件
+  -SnapshotFrame 840      导出第 840 帧的 ASCII 文本到 preview.txt
+
+运行播放器只需要 Windows 自带的 PowerShell，不需要 Python 或 FFmpeg。
+请保留本文件夹中的 Play-Ascii.ps1、AsciiPlayer.cs、movie.ascii.gz 和 audio.wav。
+movie.ascii.gz 是已转换好的 240×68、24 帧/秒 ASCII 视频。
+audio.wav 是由原音轨转换的 PCM 音频，播放时按音频进度同步画面。
+movie.json 记录时长、帧数与源文件位置。
+重新转换需要自行提供源文件 video.m4s 和 audio.m4s。
+
+build_ascii.py 是重新转换用的源代码，仅重建时需要 Python、NumPy、Pillow、FFmpeg。
+  python -m pip install -r requirements.txt
+  python build_ascii.py --video "你的路径\video.m4s" --audio "你的路径\audio.m4s"
+预览文件 preview.txt / preview.png 仅用于展示，不是播放所必需。

@@ -1,0 +1,14 @@
+{
+  "width": 240,
+  "height": 68,
+  "fps": 24,
+  "frames": 6565,
+  "video_seconds": 273.5416666666667,
+  "audio_seconds": 273.716825,
+  "video_offset_ms": 41,
+  "source_video": "video.m4s",
+  "source_audio": "audio.m4s",
+  "watermark_removed": true,
+  "auto_trim_black_borders": true,
+  "default_display": "fill terminal viewport"
+}
